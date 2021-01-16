@@ -69,6 +69,11 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
+                        {{-- use gates in blade --}}
+                        @can('subs-only',Auth::user()) 
+                           <a href="{{ url('/subs')  }}" >subscribers </a>
+                        @endcan
+                        
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

@@ -20,3 +20,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+// gates
+Route::get('/subs',function(){
+    //use gates  'subs-only' 
+    if(Gate::allows('subs-only',Auth::user())){
+        return view('subs');
+    }else{
+        return 'You are not subscriber , unauthorized';
+    }
+   
+});
