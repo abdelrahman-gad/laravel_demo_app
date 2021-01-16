@@ -20,3 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// events
+Route::get('event',function(){
+    event(new TaskEvent('Hey How Are You'));
+});
+
+
+
+
