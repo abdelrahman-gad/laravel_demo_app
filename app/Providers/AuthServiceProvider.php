@@ -29,5 +29,8 @@ class AuthServiceProvider extends ServiceProvider
 
         // define gates 
         Gate::define('subs-only','App\Policies\subs@subs_only');
+        Gate::resource('posts','App\Policies\PostPolicy',[
+            // 'extra-gate'=>'extra policy method'
+        ]);
     }
 }
