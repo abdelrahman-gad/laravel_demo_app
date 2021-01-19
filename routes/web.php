@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Mail\WelcomeMail;
+
+// route of email
+Route::get('/email',function(){
+    Mail::to('abdelrahmangad95@gmail.com')->send(new WelcomeMail());
+     return new WelcomeMail();
+});
+
+
 Route::get('/', function () {
     return view('welcome');
 });
