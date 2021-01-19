@@ -13,10 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Notifications\TaskCompleted;
+
+use App\User;
+
+
+
+
 Route::get('/', function () {
+    $users  = User::find(1);// note you can send to multiple users [control this via collections]
+    Notification::send($users , new TaskCompleted());
+    // this is convenient if you send to one user
+   // User::find(1)->notify(new TaskCompleted); 
     return view('welcome');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
