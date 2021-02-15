@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
-
+use Auth;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts = Post::get();
+        return view('home' , compact('posts') );
+    }
+
+    public function  saveComment(Request $request){
+        Comment::create([
+               'post_id' => $request -> post_id ,
+               'user_id' => Auth::id(),
+               'comment' => $request -> post_content,
+        ]);
+
+        
+
+
+
+        return redirect() -> back() -> with(['success'=> 'تم اضافه تعليقك بنجاح ']);
     }
 }
