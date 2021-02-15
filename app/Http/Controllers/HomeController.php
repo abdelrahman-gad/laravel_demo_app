@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Events\NewNotification;
 use Auth;
 class HomeController extends Controller
 {
@@ -25,7 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::get();
+        $posts = Post::with(['comments' => function($q){
+            $q -> select('id','post_id','comment');
+        }])->get();
+
         return view('home' , compact('posts') );
     }
 
@@ -35,9 +39,16 @@ class HomeController extends Controller
                'user_id' => Auth::id(),
                'comment' => $request -> post_content,
         ]);
+        $data =[
+                    'user_id' => Auth::id(),
+                    'user_name'  => Auth::user() -> name,
+                    'comment' => $request -> post_content,
+                    'post_id' =>$request -> post_id ,
+                ];
 
-        
+           ///   save  notify in database table ////
 
+         event(new NewNotification($data));
 
 
         return redirect() -> back() -> with(['success'=> 'تم اضافه تعليقك بنجاح ']);

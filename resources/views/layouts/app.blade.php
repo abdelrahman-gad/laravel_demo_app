@@ -84,7 +84,7 @@
                             </ul>
                         </li>
                     @endauth
-                    
+
 
                         <!-- Authentication Links -->
                         @guest
@@ -144,6 +144,7 @@
           alert(JSON.stringify(data));
         });
       </script>    
+<script src="{{asset('js/pusherNotifications.js')}}"></script>
 
 </body>
 </html>
