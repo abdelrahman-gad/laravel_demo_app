@@ -22,4 +22,3 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-// this is mergable 
