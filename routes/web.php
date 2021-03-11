@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Hello\Hello;
-
+use App\Hello\HelloFacade;
 Route::get('/', function () {
+  return   HelloFacade::sayHi('ahmed');
     
-    return (new Hello)->sayHi('ahmed');
 });
 
 Auth::routes();
