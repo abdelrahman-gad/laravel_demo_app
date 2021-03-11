@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+define('PAGINATION_COUNT',10);
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+
+
+
+Route::group(['prefix'=>'offers','middleware'=>'auth' , 'namespace'=>'Offers'] , function(){
+    Route::get('/','OfferController@index')->name('offers.all');
+    Route::get('/details/{offer_id}','OfferController@show')->name('offers.show');
+});
+
+
+Route::get('get-checkout-id', 'PaymentProviderController@getCheckOutId')->name('offers.checkout');
