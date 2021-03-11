@@ -13,11 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Hello\Hello;
+
 Route::get('/', function () {
-    return view('welcome');
+    
+    return (new Hello)->sayHi('ahmed');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
+
 
